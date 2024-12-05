@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Prediction</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-image: url('{{ STATIC_IMAGE_PATH }}');
+        background-size: cover;
+        height: 100vh;
+      }
+      .container {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-center">Customer Prediction</h1>
+      <form id="customerForm">
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="mntwines">MntWines</label>
+            <input
+              type="number"
+              class="form-control"
+              id="mntwines"
+              name="MntWines"
+              required
+            />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="income">Income</label>
+            <input
+              type="number"
+              class="form-control"
+              id="income"
+              name="Income"
+              required
+            />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="mntgoldprods">MntGoldProds</label>
+            <input
+              type="number"
+              class="form-control"
+              id="mntgoldprods"
+              name="MntGoldProds"
+              required
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="customer_age">Customer Age</label>
+            <input
+              type="number"
+              class="form-control"
+              id="customer_age"
+              name="Customer_Age"
+              required
+            />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="recency">Recency</label>
+            <input
+              type="number"
+              class="form-control"
+              id="recency"
+              name="Recency"
+              required
+            />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="numacceptedcmp">Number of Accepted Campaigns</label>
+            <input
+              type="number"
+              class="form-control"
+              id="numacceptedcmp"
+              name="NumAcceptedCmp"
+              required
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="mntmeatproducts">MntMeatProducts</label>
+            <input
+              type="number"
+              class="form-control"
+              id="mntmeatproducts"
+              name="MntMeatProducts"
+              required
+            />
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Predict</button>
+      </form>
+      <div id="result" class="mt-3"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      document
+        .getElementById('customerForm')
+        .addEventListener('submit', function (event) {
+          event.preventDefault(); // Prevent form submission
+          const formData = new FormData(this);
+          fetch('/predict', {
+            method: 'POST',
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              const prediction =
+                data.prediction === 1
+                  ? 'He will respond to the next compaign'
+                  : "He 'll not respond to the next compaign";
+              document.getElementById(
+                'result'
+              ).innerHTML = `<div class="alert alert-info" role="alert">${prediction}</div>`;
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+        });
+    </script>
+  </body>
+</html>
