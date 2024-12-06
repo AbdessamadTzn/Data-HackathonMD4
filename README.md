@@ -16,7 +16,7 @@ This project is designed for predicting marketing campaign responses.
 
 ### Prerequisites:
 1. **Git** installed on your laptop.
-2. **Virtualenv** installed on your laptop (You can install it from [here](https://www.freecodecamp.org/news/how-to-setup-virtual-environments-in-python/)).
+2. **Virtualenv** installed on your laptop (You can install it from [here](https://www.freecodecamp.org/news/how-to-setup-virtual-environments-in-python/).
 3. Basic coding knowledge.
 4. Your trained **model** (You should save it after training; in my case, it was a `.pkl` file, saved using `joblib`).
 5. **Joblib** installed (You can install it using `pip install joblib`, or `!pip install joblib` in Jupyter Notebooks).
