@@ -57,8 +57,7 @@ python app.py
 ---
 
 ## For Dashboard:
-You can visit the Power BI Dashboard at the following link:
-[Marketing Dashboard](#)
+Check Power BI file (Must have Power BI Desktop installed in your laptop or use cloud-based version Power BI Service)
 
 
 
